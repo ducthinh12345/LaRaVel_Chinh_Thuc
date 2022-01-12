@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\SanPham;
 use App\Models\LoaiSanPham;
+
 use Illuminate\Http\Requests;
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Collection;
 
 use App\Http\Requests\StoreSanPhamRequest;
 use App\Http\Requests\UpdateSanPhamRequest;
@@ -72,7 +75,15 @@ class SanPhamController extends Controller
     public function show(SanPham $sanPham)
     {
         $this->FixImage($sanPham);
-        return view('Admin.SanPham_index',['listSanPham'=>$sanPham]);
+        // $sanPham = SanPham::all();
+        $ctSanPham = SanPham::where('id','=',$sanPham->id)->get();  
+        $listLoai=LoaiSanPham::all();  
+        
+        return view('Admin.SanPham_show',[
+            'ctSanPham'=>$ctSanPham,
+            'SanPham'=>$sanPham,
+            'listLoai'=>$listLoai,
+        ]);
     }
 
     /**
@@ -86,7 +97,13 @@ class SanPhamController extends Controller
         //
         $this->FixImage($sanPham);
         $listLoai=LoaiSanPham::all();
-        return view('Admin.SanPham_edit',['SanPham'=>$sanPham,'listLoai'=>$listLoai]);
+        $suaSanPham = SanPham::where('id','=',$sanPham->id)->get();
+
+        // $suaSanPham = $sanPham;
+        
+        return view('Admin.SanPham_edit',[
+            'suaSanPham'=>$suaSanPham,
+            'listLoai'=>$listLoai]);
     }
 
     /**
@@ -96,24 +113,31 @@ class SanPhamController extends Controller
      * @param  \App\Models\SanPham  $sanPham
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSanPhamRequest $request, SanPham $sanPham)
+    public function update(Request $request, SanPham $SanPham)
     {
         //
+        // dd($SanPham);
         if($request->hasFile('hinhanh'))
         {
-            $sanPham->HinhAnh=$request->file('hinhanh')->store('images/sp/'.$sanPham->id,'public');
+            $SanPham->HinhAnh=$request->file('hinhanh')->store('images/sp/'.$SanPham->id,'public');
         }
-        $sanPham->fill([
+        // $SanPham = SanPham::find($request->id);
+        $SanPham->fill([
             'TenSanPham'=>$request->input('tensp'),
             'Gia'=>$request->input('gia'),
             'Size'=>$request->input('size'),
             'Mau'=>$request->input('mau'),
             'SoLuong'=>$request->input('soluong'),
-            'IdLoaiSanPham'=>$request->input('loaisp'),
-            
+            'IdLoaiSanPham'=>$request->input('idloaisanpham'),
+            'IdNhaCung'=>$request->input('idnhacungcap'),
+            'Mota'=>$request->input('mota'),
+            'TrangThai'=>$request->input('TrangThai'),
+            // 'HinhAnh'=>"",
+
+            // 'HinhAnh'=>$request->input('hinhanh'),
         ]);
-        $sanPham->save();
-        return Redirect::route('SanPham.show',['SanPham'=>$sanPham]);
+        $SanPham->save();
+        return Redirect::route('SanPham.show',['SanPham'=>$SanPham]);
     }
 
     /**

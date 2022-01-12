@@ -13,6 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $listLoaiSanPham=LoaiSanPham::all();
-        return view('Admin.HomeAdmin',['listLoai'=>$listLoaiSanPham]);
+        $listSanPham=SanPham::all();
+        return view('Admin.HomeAdmin',['listLoai'=>$listLoaiSanPham,'listSP'=>$listSanPham]);
     }
 }

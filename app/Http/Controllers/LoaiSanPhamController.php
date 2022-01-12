@@ -18,6 +18,8 @@ class LoaiSanPhamController extends Controller
     public function index()
     {
         //
+        $loaiSanPham= LoaiSanPham::all();
+        return view('Admin.LoaiSanPham_index',['listLoai'=>$loaiSanPham]);
     }
 
     /**

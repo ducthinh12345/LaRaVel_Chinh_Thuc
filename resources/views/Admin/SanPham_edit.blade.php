@@ -11,40 +11,40 @@
 @section('content')
 
     <h1>Cập nhật sản phẩm</h1>
-    
-
-    <form method="POST" action="{{ route('SanPham.update',['SanPham'=>$sanPham]) }} " enctype="multipart/form-data">
+    @foreach ($suaSanPham as $sp) 
+<form method="post" action="{{ route('SanPham.update',['SanPham'=>$sp]) }} " enctype="multipart/form-data">
         @csrf
         @method('PATCH')
-        <button type="submit">Xóa</button>
-    </form>
+        <input type="hidden" name="idsanpham" value="{{ $sp->id }}">
+        <input type="hidden" name="idnhacungcap" value="{{ $sp->IdNhaCung }}">
+        {{-- <input type="hidden" name="idloaisanpham" value="{{ $sp->IdLoaiSanPham  }}"> --}}
+        <input type="hidden" name="TrangThai" value="{{ $sp->TrangThai  }}">
+    <label for="hidden">Tên sản phẩm: </label><input name="tensp" value="{{ $sp->TenSanPham }}"> <br>
 
-    <label for="">Tên sản phẩm: </label><input name="tensp" value="{{ $sanPham->TenSanPham }}"> <br>
-
-    <select name="loaisp" >
-        <option value="">--Chọn loại--</option>
+    <select name="idloaisanpham" >
+        <option value="">----Chọn loại----</option>
 
         @foreach ($listLoai as $loai)
-            <option value="{{ $loai->id }}"@if ($loai->id==$sanPham->IdLoaiSanPham)
+            <option value="{{ $loai->id }}"@if ($loai->id==$sp->IdLoaiSanPham)
                 
             @endif>{{ $loai->TenLoaiSanPham }}</option>
         @endforeach
     </select><br>
 
-    <label for="">Giá: </label><input name="gia" value="{{ $sanPham->Gia}}"> <br>
-    <label for="">Size: </label><input name="size" value="{{ $sanPham->Size }}"> <br>
-    <label for="">Màu: </label><input name="mau" value="{{ $sanPham->Mau }}"> <br>
-    <label for="">Số lượng: </label><input name="soluong" value="{{ $sanPham->SoLuong }}"> <br>
-   
+
+    <label for="">Giá: </label><input name="gia" value="{{ $sp->Gia}}"> <br>
+    <label for="">Size: </label><input name="size" value="{{ $sp->Size }}"> <br>
+    <label for="">Màu: </label><input name="mau" value="{{ $sp->Mau }}"> <br>
+    <label for="">Số lượng: </label><input name="soluong" value="{{ $sp->SoLuong }}"> <br>   
     <label for="">Mô tả</label>
-    <textarea name="mota" id="" cols="30" rows="10">{{ $sanPham->MoTa }}</textarea>
+    <textarea name="mota" id="" cols="25" rows="5">{{ $sp->MoTa }}</textarea> <br>
     <label for="">Hình</label>
+    <img   style="width: 100px;max-height: 100px;object-fit: contain" src="{{ $sp->HinhAnh }}"><br>
+    <input type="file" accept="*.png" name="hinhanh" value="{{ $sp->HinhAnh }}"><br>
+    <input type="submit" >
+</form>
+    @endforeach
 
-
-    <img   style="width: 100px;max-height: 100px;object-fit: contain" src="{{ $sp->HinhAnh }}">
-    <input type="file" accept="../../asseets/images/*" name="hinhanh">
-    <input type="submit" name="" id="">
-    
 @endsection
 
 

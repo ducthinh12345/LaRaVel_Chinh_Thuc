@@ -23,8 +23,13 @@ Route::get('/', [HomeController::class,'index']);
 
 route::get('danhsachSanPham',[LoaiSanPhamController::class,'show2']);
 
+route::get('danhsachLoaiSanPham',[LoaiSanPhamController::class,'index']);
+
 route::get('LoaiSanPham/{loaiSanPham}',[LoaiSanPhamController::class,'show']);
 
-// Route::resource('LoaiSanPham/{loaiSanPham}', LoaiSanPhamController::class);
+route::get('SanPham/{sanPham}',[SanPhamController::class,'show']);
+
+route::get('SanPham/{sanPham}/edit',[SanPhamController::class,'edit']);
+
 Route::resource('LoaiSanPham', LoaiSanPhamController::class);
 Route::resource('SanPham', SanPhamController::class);
