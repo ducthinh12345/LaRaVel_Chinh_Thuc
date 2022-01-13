@@ -99,7 +99,7 @@
           
       {{-- Hiện toàn bộ sản phẩm ở đây --}}
 		      <li class="nav-item menu-items">
-            <a class="nav-link" href="http://127.0.0.1:8000/danhsachSanPham">
+            <a class="nav-link" href="{{ route('SanPham.index') }}">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>

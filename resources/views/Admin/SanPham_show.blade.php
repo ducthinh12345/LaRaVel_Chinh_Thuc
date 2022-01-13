@@ -90,8 +90,7 @@
                     
               </table>
             </div>
-            <br> <a href="{{ route('SanPham.create') }}" type="button" class="btn btn-light btn-fw">Thêm</a><br><br>
-   
+   <br>
             <a href="{{ route('SanPham.edit',['SanPham'=>$SanPham]) }}" type="button" class="btn btn-light btn-fw">Sửa</a><br><br>
         
             <form method="POST" action="{{ route('SanPham.destroy',['SanPham'=>$SanPham]) }}">

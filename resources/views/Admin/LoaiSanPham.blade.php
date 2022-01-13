@@ -15,7 +15,10 @@
     <div class="card">
       <div class="card-body">
         <h2 class="card-title"  style="text-align: center">Sản phẩm </h2>
-        <a href="{{ route('SanPham.create') }}" type="button" class="btn btn-light btn-fw">Thêm</a><br><br>
+        {{-- Không hiểu tại sao ko gọi route đc nên gọi nguyên cái link
+            
+          --}}
+        <a href="http://127.0.0.1:8000/ThemSanPham" type="button" class="btn btn-light btn-fw">Thêm</a><br><br>
         {{-- <p class="card-description"> Add class <code>.table</code>
         </p> --}}
         <div class="table-responsive " >

@@ -14,6 +14,7 @@ use Illuminate\Support\Collection;
 
 use App\Http\Requests\StoreSanPhamRequest;
 use App\Http\Requests\UpdateSanPhamRequest;
+use App\Http\Controllers\LoaiSanPhamController;
 
 class SanPhamController extends Controller
 {
@@ -43,7 +44,9 @@ class SanPhamController extends Controller
             $this->FixImage($sp);
 
         }
-        return view('Admin.SanPham_index',['listSanPham'=>$listSanPham]);
+        $listSanPham=SanPham::all();
+        return view('Admin.LoaiSanPham',['listSanPham'=>$listSanPham]);
+        // return view('Admin.SanPham_index',['listSanPham'=>$listSanPham]);
     }
 
     /**
@@ -58,10 +61,10 @@ class SanPhamController extends Controller
         return view('Admin.SanPham_create',['listLoai'=>$listLoai]);
     }
 
-    public function asd()
+    public function themSanPham()
     {
         $listLoai=LoaiSanPham::all();
-        return view('Admin.LoaiSanPham_index',['listLoai'=>$listLoai]);
+        return view('Admin.SanPham_create',['listLoai'=>$listLoai]);
     }
     /**
      * Store a newly created resource in storage.
@@ -69,8 +72,10 @@ class SanPhamController extends Controller
      * @param  \App\Http\Requests\StoreSanPhamRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSanPhamRequest $request)
-    {
+    public function store(Request $request)
+    {   
+        $SanPham = new SanPham;
+        // dd($SanPham);
         if($request->hasFile('hinhanh'))
         {
             $SanPham->HinhAnh=$request->file('hinhanh')->store('images/faces','public');
@@ -158,10 +163,8 @@ class SanPhamController extends Controller
 
         }
         else{
-            // $SanPham->HinhAnh='/assets/images/faces/face26.jpg';
 
             $SanPham->HinhAnh=$SanPham->HinhAnh;
-
         }
 
         // $SanPham = SanPham::find($request->id);
@@ -189,8 +192,10 @@ class SanPhamController extends Controller
      * @param  \App\Models\SanPham  $sanPham
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SanPham $sanPham)
+    public function destroy(SanPham $SanPham)
     {
-        //
+        // dd($SanPham);
+        $SanPham->delete();
+         return Redirect::route('SanPham.index');
     }
 }

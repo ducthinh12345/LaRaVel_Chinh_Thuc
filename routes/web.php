@@ -33,7 +33,7 @@ route::get('SanPham/{sanPham}/edit',[SanPhamController::class,'edit']);
 
 route::get('SanPham/create',[SanPhamController::class,'create']);
 
-route::get('SanPham/ngu',[SanPhamController::class,'asd']);
+route::get('ThemSanPham',[SanPhamController::class,'themSanPham']);
 
 Route::resource('LoaiSanPham', LoaiSanPhamController::class);
 Route::resource('SanPham', SanPhamController::class);
