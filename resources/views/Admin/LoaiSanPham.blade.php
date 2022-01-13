@@ -15,10 +15,11 @@
     <div class="card">
       <div class="card-body">
         <h2 class="card-title"  style="text-align: center">Sản phẩm </h2>
+        <a href="{{ route('SanPham.create') }}" type="button" class="btn btn-light btn-fw">Thêm</a><br><br>
         {{-- <p class="card-description"> Add class <code>.table</code>
         </p> --}}
-        <div class="table-responsive">
-          <table class="table table-hover" >
+        <div class="table-responsive " >
+          <table class="table table-hover"  >
             <thead>
               <tr>
                 <th style="text-align: center">ID</th>                
@@ -38,16 +39,16 @@
               
               @foreach ($listSanPham as $sp)
               
-                <tr> 
+                <tr > 
                   <td> 
-                    <div style="color: rgb(8, 255, 8);text-align: center">{{ $sp->id }}</div>
+                    <div  style="color: rgb(8, 255, 8);text-align: center">{{ $sp->id }}</div>
                   </td>
-                  <td style="text-align: center">
-                    <a href="{{ route('SanPham.show',['SanPham'=>$sp]) }} " style="color: rgb(245, 134, 139)" >
+                  <td style="text-align: center" >
+                    <a  href="{{ route('SanPham.show',['SanPham'=>$sp]) }}" style="color: rgb(245, 134, 139)" >
                       {{ $sp->TenSanPham }}
                     </a>
                   </td>
-                  <td>
+                  <td >
                     <div style="text-align: center;color: rgb(255, 0, 191)">{{ $sp->Gia }}</div>
                   </td>
                   {{-- <td>

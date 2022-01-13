@@ -25,6 +25,9 @@ class SanPhamController extends Controller
         }
         else{
             $SanPham->HinhAnh='/assets/images/faces/face26.jpg';
+
+            // $SanPham->HinhAnh=$SanPham->HinhAnh;
+
         }
     }
     /**
@@ -50,11 +53,16 @@ class SanPhamController extends Controller
      */
     public function create()
     {
-        //
+        
         $listLoai=LoaiSanPham::all();
         return view('Admin.SanPham_create',['listLoai'=>$listLoai]);
     }
 
+    public function asd()
+    {
+        $listLoai=LoaiSanPham::all();
+        return view('Admin.LoaiSanPham_index',['listLoai'=>$listLoai]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -63,7 +71,28 @@ class SanPhamController extends Controller
      */
     public function store(StoreSanPhamRequest $request)
     {
-        //
+        if($request->hasFile('hinhanh'))
+        {
+            $SanPham->HinhAnh=$request->file('hinhanh')->store('images/faces','public');
+        }
+        $this->FixImage($SanPham);
+
+
+        // 
+        $SanPham->fill([
+            'TenSanPham'=>$request->input('tensp'),
+            'Gia'=>$request->input('gia'),
+            'Size'=>$request->input('size'),
+            'Mau'=>$request->input('mau'),
+            'SoLuong'=>$request->input('soluong'),
+            'IdLoaiSanPham'=>$request->input('idloaisanpham'),
+            'IdNhaCung'=>$request->input('idnhacungcap'),
+            'Mota'=>$request->input('mota'),
+            'TrangThai'=>$request->input('TrangThai'),
+           
+        ]);
+        $SanPham->save();
+        return Redirect::route('SanPham.show',['SanPham'=>$SanPham]);
     }
 
     /**
@@ -117,10 +146,24 @@ class SanPhamController extends Controller
     {
         //
         // dd($SanPham);
+        
         if($request->hasFile('hinhanh'))
         {
-            $SanPham->HinhAnh=$request->file('hinhanh')->store('images/sp/'.$SanPham->id,'public');
+            $SanPham->HinhAnh=$request->file('hinhanh')->store('images/faces','public');
         }
+        // $this->FixImage($SanPham);
+
+        if (Storage::disk('public')->exists($SanPham->HinhAnh)) {
+            $SanPham->HinhAnh= Storage::url($SanPham->HinhAnh);
+
+        }
+        else{
+            // $SanPham->HinhAnh='/assets/images/faces/face26.jpg';
+
+            $SanPham->HinhAnh=$SanPham->HinhAnh;
+
+        }
+
         // $SanPham = SanPham::find($request->id);
         $SanPham->fill([
             'TenSanPham'=>$request->input('tensp'),

@@ -64,7 +64,7 @@
                       </td>
                       <td>
                         <div style="text-align: center; color: rgb(0, 255, 213)" >
-                            @if ($listLoai[$ct->IdLoaiSanPham]->id==$ct->IdLoaiSanPham)
+                            @if ($listLoai[$ct->IdLoaiSanPham-1]->id==$ct->IdLoaiSanPham)
                                 
                             @endif{{ $listLoai[$ct->IdLoaiSanPham-1]->TenLoaiSanPham }}
                             
@@ -74,7 +74,10 @@
                         <div style="text-align: center;color: rgb(134, 119, 221)">{{ $ct->IdNhaCung }}</div>
                       </td>
                       <td>
-                        <div style="text-align: center;color: rgb(87, 252, 128)">{{ $ct->HinhAnh }}</div>
+                        <div style="text-align: center;color: rgb(87, 252, 128)">
+                          
+                          <img src="{{ $ct->HinhAnh }}" style="width: 100px;max-height: 100px;object-fit: contain" alt="">
+                        </div>
                       </td>
                       <td style="text-align: center">                  
                           @if ($ct->TrangThai == 1)
