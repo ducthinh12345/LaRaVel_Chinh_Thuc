@@ -18,7 +18,7 @@
         {{-- Không hiểu tại sao ko gọi route đc nên gọi nguyên cái link
             
           --}}
-        <a href="http://127.0.0.1:8000/ThemSanPham" type="button" class="btn btn-light btn-fw">Thêm</a><br><br>
+        <a href="http://127.0.0.1:8000/ThemSanPham" type="button" class="btn btn-light btn-fw">Thêm Sản Phẩm</a><br><br>
         {{-- <p class="card-description"> Add class <code>.table</code>
         </p> --}}
         <div class="table-responsive " >
@@ -84,8 +84,10 @@
                 @endforeach
           </table>
         </div>
+        <a href="{{ route('LoaiSanPham.edit',['LoaiSanPham'=>$loaiSanPham]) }}" type="button" class="btn btn-light btn-fw">Sửa Loại Sản Phẩm</a><br><br>
+        <a href="http://127.0.0.1:8000/ThemSanPham" type="button" class="btn btn-light btn-fw">Xóa Loại Sản Phẩm</a><br><br>
       </div>
-    {{-- </div> --}}
+    </div>
 
 
 @endsection

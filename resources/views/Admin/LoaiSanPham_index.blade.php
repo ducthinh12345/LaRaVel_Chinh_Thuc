@@ -16,6 +16,7 @@
       <h4 class="card-title">Loại Sản phẩm </h4>
       {{-- <p class="card-description"> Add class <code>.table</code>
       </p> --}}
+      <a href="http://127.0.0.1:8000/ThemSanPham" type="button" class="btn btn-light btn-fw">Thêm Loại Sản Phẩm</a><br><br>
       <div class="table-responsive">
         <table class="table table-hover">
           <thead>
@@ -25,19 +26,19 @@
               
             </tr>
           </thead>
-          <tbody> @for ($i=1;$i<=5;$i++)  
+          {{-- <tbody> @for ($i=1;$i<=5;$i++)   --}}
             
-            {{-- @foreach ($listLoai as $loai) --}}
+            @foreach ($listLoai as $loai)
             
               <tr> 
                 <td> 
-                 <a href="{{ route('LoaiSanPham.show',['LoaiSanPham'=>$listLoai[$i-1]]) }}">
-                  {{ $listLoai[$i-1]->TenLoaiSanPham }}
+                 <a href="{{ route('LoaiSanPham.show',['LoaiSanPham'=>$loai]) }}">
+                  {{ $loai->TenLoaiSanPham }}
                 </a>
                </td>
                <td>
                 
-                @if ($listLoai[$i-1]->TrangThai == 1)
+                @if ($loai->TrangThai == 1)
                   <a>Còn tác dụng</a>
                 @endif 
                   
@@ -45,9 +46,9 @@
               </tr>
               
               
-              {{-- @endforeach --}}
+              @endforeach
               
-              @endfor
+              {{-- @endfor --}}
           </tbody>
         </table>
       </div>

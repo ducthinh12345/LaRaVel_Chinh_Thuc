@@ -129,6 +129,7 @@ class SanPhamController extends Controller
     public function edit(SanPham $sanPham)
     {
         //
+        // dd($sanPham);
         $this->FixImage($sanPham);
         $listLoai=LoaiSanPham::all();
         $suaSanPham = SanPham::where('id','=',$sanPham->id)->get();

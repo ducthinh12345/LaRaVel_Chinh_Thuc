@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\LoaiSanPham;
 use App\Models\SanPham;
+use Illuminate\Http\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 // use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreLoaiSanPhamRequest;
 use App\Http\Requests\UpdateLoaiSanPhamRequest;
@@ -76,7 +79,13 @@ class LoaiSanPhamController extends Controller
      */
     public function edit(LoaiSanPham $loaiSanPham)
     {
-        //
+        // $LoaiSanPham=LoaiSanPham::all();
+        // dd($loaiSanPham);
+        $LoaiSanPham = LoaiSanPham::where('id','=',$loaiSanPham->id)->get();
+        
+        return view('Admin.LoaiSanPham_edit',[
+            'sualoaiSanPham'=>$LoaiSanPham
+            ]);
     }
 
     /**
@@ -86,9 +95,17 @@ class LoaiSanPhamController extends Controller
      * @param  \App\Models\LoaiSanPham  $loaiSanPham
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLoaiSanPhamRequest $request, LoaiSanPham $loaiSanPham)
+    public function update(Request $request, LoaiSanPham $LoaiSanPham)
     {
-        //
+        // dd($LoaiSanPham);
+        $LoaiSanPham->fill([
+            'TenLoaiSanPham'=>$request->input('tenloaisp'),
+            
+            'TrangThai'=>$request->input('TrangThai'),
+            
+        ]);
+        $LoaiSanPham->save();
+        return Redirect::route('LoaiSanPham.show',['LoaiSanPham'=>$LoaiSanPham]);
     }
 
     /**

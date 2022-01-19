@@ -11,6 +11,8 @@ class LoaiSanPham extends Model
     protected $guarded=[];
     public function SanPhams()
     {
+
+        
         return $this->hasMany(SanPham::class);
     }
 }
