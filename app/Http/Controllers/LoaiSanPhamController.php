@@ -32,9 +32,12 @@ class LoaiSanPhamController extends Controller
      */
     public function create()
     {
-        //
+        
     }
-
+public function themLoaiSanPham()
+{
+    return view('Admin.LoaiSanPham_create');
+}
     
     /**
      * Store a newly created resource in storage.
@@ -42,9 +45,16 @@ class LoaiSanPhamController extends Controller
      * @param  \App\Http\Requests\StoreLoaiSanPhamRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreLoaiSanPhamRequest $request)
+    public function store(Request $request)
     {
-        //
+        $LoaiSanPham = new LoaiSanPham;
+        $LoaiSanPham->fill([
+       
+                'TenLoaiSanPham'=>$request->input('tenlsp'),
+                'TrangThai'=>$request->input('TrangThai')
+        ]);
+        $LoaiSanPham->save();
+        return Redirect::route('LoaiSanPham.index',['LoaiSanPham'=>$LoaiSanPham]);
     }
 
     /**
@@ -106,6 +116,8 @@ class LoaiSanPhamController extends Controller
         ]);
         $LoaiSanPham->save();
         return Redirect::route('LoaiSanPham.show',['LoaiSanPham'=>$LoaiSanPham]);
+
+        // return Redirect::route('LoaiSanPham.index');
     }
 
     /**
@@ -114,8 +126,17 @@ class LoaiSanPhamController extends Controller
      * @param  \App\Models\LoaiSanPham  $loaiSanPham
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LoaiSanPham $loaiSanPham)
+    public function destroy(Request $request, LoaiSanPham $LoaiSanPham)
     {
-        //
+       $LoaiSanPham->fill([
+            'TenLoaiSanPham'=>$request->input('tenloaisp'),
+            
+            'TrangThai'=>$request->input('TrangThai'),
+            
+        ]);
+        $LoaiSanPham->save();
+        
+
+        return Redirect::route('LoaiSanPham.index');
     }
 }

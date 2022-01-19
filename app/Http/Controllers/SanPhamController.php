@@ -39,16 +39,17 @@ class SanPhamController extends Controller
     public function index()
     {
         $listSanPham=SanPham::all();
+
         foreach($listSanPham as $sp)
         {
             $this->FixImage($sp);
 
         }
-        $listSanPham=SanPham::all();
-        return view('Admin.LoaiSanPham',['listSanPham'=>$listSanPham]);
-        // return view('Admin.SanPham_index',['listSanPham'=>$listSanPham]);
+        // $listSanPham=SanPham::all();
+        // return view('Admin.LoaiSanPham',['listSanPham'=>$listSanPham]);
+        return view('Admin.SanPham_index',['listSanPham'=>$listSanPham]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -193,10 +194,13 @@ class SanPhamController extends Controller
      * @param  \App\Models\SanPham  $sanPham
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SanPham $SanPham)
+    public function destroy(Request $request,SanPham $SanPham)
     {
         // dd($SanPham);
-        $SanPham->delete();
+        $SanPham->fill([
+            'TrangThai'=>$request->input('TrangThai'),
+        ]);
+        $SanPham->save();
          return Redirect::route('SanPham.index');
     }
 }
