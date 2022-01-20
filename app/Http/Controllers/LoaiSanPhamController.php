@@ -20,9 +20,21 @@ class LoaiSanPhamController extends Controller
      */
     public function index()
     {
-        //
-        $loaiSanPham= LoaiSanPham::all();
-        return view('Admin.LoaiSanPham_index',['listLoai'=>$loaiSanPham]);
+        
+        $listLoai= LoaiSanPham::all();
+        
+        if($loai=request()->timkiemid)
+        {
+            $listLoai=LoaiSanPham::where('id','=',$loai)->paginate(15);
+        }
+        
+        if($loai=request()->timkiemten)
+        {
+            $listLoai=LoaiSanPham::where('TenLoaiSanPham','like','%'.$loai.'%')->paginate(15);
+        }
+        
+        // dd($listLoai);
+        return view('Admin.LoaiSanPham_index',compact('listLoai'));
     }
 
     /**
@@ -139,4 +151,5 @@ public function themLoaiSanPham()
 
         return Redirect::route('LoaiSanPham.index');
     }
+    
 }

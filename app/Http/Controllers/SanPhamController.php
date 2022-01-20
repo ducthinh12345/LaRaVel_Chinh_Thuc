@@ -47,7 +47,16 @@ class SanPhamController extends Controller
         }
         // $listSanPham=SanPham::all();
         // return view('Admin.LoaiSanPham',['listSanPham'=>$listSanPham]);
-        return view('Admin.SanPham_index',['listSanPham'=>$listSanPham]);
+        if($sp=request()->timkiemid)
+        {
+            $listSanPham=SanPham::where('id','=',$sp)->paginate(15);
+        }
+        
+        if($sp=request()->timkiemten)
+        {
+            $listSanPham=SanPham::where('TenSanPham','like','%'.$sp.'%')->paginate(15);
+        }
+        return view('Admin.SanPham_index',compact('listSanPham'));
     }
     
     /**

@@ -16,4 +16,9 @@ class HomeController extends Controller
         $listSanPham=SanPham::all();
         return view('Admin.HomeAdmin',['listLoai'=>$listLoaiSanPham,'listSP'=>$listSanPham]);
     }
+    public function searchLoaiSP(Request $request, LoaiSanPham $LoaiSanPham)
+    {
+        $listLoaiSanPham = LoaiSanPham::where('id','=','searchLoaiSP')->get();
+        return view('LoaiSanPham.show',['LoaiSanPham'=>$listLoaiSanPham]);
+    }
 }

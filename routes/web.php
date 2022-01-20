@@ -26,5 +26,7 @@ route::get('ThemLoaiSanPham',[LoaiSanPhamController::class,'themLoaiSanPham']);
 
 route::get('ThemSanPham',[SanPhamController::class,'themSanPham']);
 
+Route::get('LoaiSanPham/search', [HomeController::class,'searchLoaiSP']);
+
 Route::resource('LoaiSanPham', LoaiSanPhamController::class);
 Route::resource('SanPham', SanPhamController::class);

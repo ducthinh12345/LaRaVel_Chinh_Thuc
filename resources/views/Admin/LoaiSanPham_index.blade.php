@@ -5,7 +5,21 @@
 @section('sidebar')
     @parent
 
-    <H5>Loại sản phảm</H5>
+    {{-- <H5>Loại sản phảm</H5> --}}
+    <form action="" role="form">
+        <div class="form-group">
+            <label for="">Tìm Kiếm theo ID</label>
+            <input type="search" style="color: red" class="form-control" name="timkiemid" id="" placeholder="Nhập ID loại sản phẩm tại đây ">
+        </div>
+        <div class="form-group">
+            <label for="">Tìm Kiếm theo tên</label>
+            <input type="search" style="color: red" class="form-control" name="timkiemten" id="" placeholder="Nhập TÊN loại sản phẩm tại đây ">
+        </div>
+
+        
+
+        <button type="submit" class="btn btn-primary"><i class="fas fa-search">Tìm</i></button>
+    </form>
 @endsection
 
 @section('content')
@@ -28,30 +42,30 @@
                         </tr>
                     </thead>
                     {{-- <tbody> @for ($i = 1; $i <= 5; $i++) --}}
+                    <tbody>
+                        @foreach ($listLoai as $loai)
+                            @if ($loai->TrangThai == 1)
 
-                    @foreach ($listLoai as $loai)
-                        @if ($loai->TrangThai == 1)
 
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('LoaiSanPham.show', ['LoaiSanPham' => $loai]) }}">
+                                            {{ $loai->TenLoaiSanPham }}
+                                        </a>
+                                    </td>
+                                    <td>
 
-                            <tr>
-                                <td>
-                                    <a href="{{ route('LoaiSanPham.show', ['LoaiSanPham' => $loai]) }}">
-                                        {{ $loai->TenLoaiSanPham }}
-                                    </a>
-                                </td>
-                                <td>
+                                        @if ($loai->TrangThai == 1)
+                                            <a>Còn tác dụng</a>
+                                        @endif
 
-                                    @if ($loai->TrangThai == 1)
-                                        <a>Còn tác dụng</a>
-                                    @endif
+                                    </td>
+                                </tr>
 
-                                </td>
-                            </tr>
+                            @endif
+                        @endforeach
 
-                        @endif
-                    @endforeach
-
-                    {{-- @endfor --}}
+                        {{-- @endfor --}}
                     </tbody>
                 </table>
             </div>

@@ -5,7 +5,18 @@
 @section('sidebar')
     @parent
 
+    <form action="" role="form">
+        <div class="form-group">
+            <label for="">Tìm Kiếm theo ID</label>
+            <input type="search" style="color: red" class="form-control" name="timkiemid" id="" placeholder="Nhập ID loại sản phẩm tại đây ">
+        </div>
+        <div class="form-group">
+            <label for="">Tìm Kiếm theo tên</label>
+            <input type="search" style="color: red" class="form-control" name="timkiemten" id="" placeholder="Nhập TÊN loại sản phẩm tại đây ">
+        </div>
 
+        <button type="submit" class="btn btn-primary"><i class="fas fa-search">Tìm</i></button>
+    </form>
 @endsection
 
 @section('content')
