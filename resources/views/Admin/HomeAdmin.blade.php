@@ -15,9 +15,7 @@
         <div class="col-lg-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Loại Sản phẩm </h4>
-                    {{-- <p class="card-description"> Add class <code>.table</code>
-            </p> --}}
+                    <h4 class="card-title">Loại Sản phẩm </h4>                    
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -79,6 +77,43 @@
                                             @endif
                                             @if ($listSP[$i - 1]->TrangThai != 1)
                                                 <a class="text-danger">Hết Hàng</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endfor
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--  Nhà cung cấp  --}}
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Nhà cung cấp </h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for ($i = 1; $i <= 2; $i++)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ route('NhaCungCap.show', ['NhaCungCap' => $listNhaCungCap[$i - 1]]) }}">
+                                                {{ $listNhaCungCap[$i - 1]->TenNhaCungCap }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if ($listNhaCungCap[$i - 1]->TrangThai == 1)
+                                                <a class="text-info">Còn hợp tác</a>
+                                            @endif
+                                            @if ($listNhaCungCap[$i - 1]->TrangThai != 1)
+                                                <a class="text-danger">Dừng hợp tác</a>
                                             @endif
                                         </td>
                                     </tr>

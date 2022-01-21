@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\LoaiSanPham;
 use App\Models\SanPham;
-
+use App\Models\NhaCungCap;
 
 class HomeController extends Controller
 {
@@ -14,11 +14,12 @@ class HomeController extends Controller
     {
         $listLoaiSanPham=LoaiSanPham::all();
         $listSanPham=SanPham::all();
-        return view('Admin.HomeAdmin',['listLoai'=>$listLoaiSanPham,'listSP'=>$listSanPham]);
+        $listNhaCungCap=NhaCungCap::all();
+        return view('Admin.HomeAdmin',[
+            'listLoai'=>$listLoaiSanPham,
+            'listSP'=>$listSanPham,
+            'listNhaCungCap'=>$listNhaCungCap,
+        ]);
     }
-    public function searchLoaiSP(Request $request, LoaiSanPham $LoaiSanPham)
-    {
-        $listLoaiSanPham = LoaiSanPham::where('id','=','searchLoaiSP')->get();
-        return view('LoaiSanPham.show',['LoaiSanPham'=>$listLoaiSanPham]);
-    }
+   
 }

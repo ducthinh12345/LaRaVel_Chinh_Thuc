@@ -64,15 +64,19 @@
                                     <div style="text-align: center;color: rgb(255, 255, 255)">{{ $ct->SoLuong }}</div>
                                 </td>
                                 <td>
-                                    <div style="text-align: center; color: rgb(0, 255, 213)">
+                                    <a href="{{ route('LoaiSanPham.show',['LoaiSanPham'=>$listLoai[$ct->IdLoaiSanPham - 1]]) }}" style="text-align: center; color: rgb(0, 255, 213)">
                                         @if ($listLoai[$ct->IdLoaiSanPham - 1]->id == $ct->IdLoaiSanPham)
 
                                         @endif{{ $listLoai[$ct->IdLoaiSanPham - 1]->TenLoaiSanPham }}
 
-                                    </div>
+                                    </a>
                                 </td>
                                 <td>
-                                    <div style="text-align: center;color: rgb(134, 119, 221)">{{ $ct->IdNhaCung }}</div>
+                                    <a href="{{ route('NhaCungCap.show',['NhaCungCap'=>$listNhaCungCap[$ct->IdNhaCung - 1]]) }}" style="text-align: center;color: rgb(134, 119, 221)">
+                                        @if ($listNhaCungCap[$ct->IdNhaCung - 1]->id == $ct->IdNhaCung)
+
+                                        @endif{{ $listNhaCungCap[$ct->IdNhaCung - 1]->TenNhaCungCap }}
+                                    </a>
                                 </td>
                                 <td>
                                     <div style="text-align: center;color: rgb(87, 252, 128)">

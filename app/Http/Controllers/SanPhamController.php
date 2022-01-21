@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SanPham;
 use App\Models\LoaiSanPham;
+use App\Models\NhaCungCap;
 
 use Illuminate\Http\Requests;
 use Illuminate\Http\Request;
@@ -45,8 +46,7 @@ class SanPhamController extends Controller
             $this->FixImage($sp);
 
         }
-        // $listSanPham=SanPham::all();
-        // return view('Admin.LoaiSanPham',['listSanPham'=>$listSanPham]);
+       
         if($sp=request()->timkiemid)
         {
             $listSanPham=SanPham::where('id','=',$sp)->paginate(15);
@@ -74,7 +74,11 @@ class SanPhamController extends Controller
     public function themSanPham()
     {
         $listLoai=LoaiSanPham::all();
-        return view('Admin.SanPham_create',['listLoai'=>$listLoai]);
+        $listNhaCungCap=NhaCungCap::all();
+        return view('Admin.SanPham_create',[
+            'listLoai'=>$listLoai,
+            'listNhaCungCap'=>$listNhaCungCap,
+        ]);
     }
     /**
      * Store a newly created resource in storage.
@@ -122,11 +126,13 @@ class SanPhamController extends Controller
         // $sanPham = SanPham::all();
         $ctSanPham = SanPham::where('id','=',$sanPham->id)->get();  
         $listLoai=LoaiSanPham::all();  
+        $listNhaCungCap=NhaCungCap::all();
         
         return view('Admin.SanPham_show',[
             'ctSanPham'=>$ctSanPham,
             'SanPham'=>$sanPham,
             'listLoai'=>$listLoai,
+            'listNhaCungCap'=>$listNhaCungCap,
         ]);
     }
 
@@ -142,13 +148,16 @@ class SanPhamController extends Controller
         // dd($sanPham);
         $this->FixImage($sanPham);
         $listLoai=LoaiSanPham::all();
+        $listNhaCungCap=NhaCungCap::all();
         $suaSanPham = SanPham::where('id','=',$sanPham->id)->get();
 
         // $suaSanPham = $sanPham;
         
         return view('Admin.SanPham_edit',[
             'suaSanPham'=>$suaSanPham,
-            'listLoai'=>$listLoai]);
+            'listLoai'=>$listLoai,
+            'listNhaCungCap'=>$listNhaCungCap,
+        ]);
     }
 
     /**
